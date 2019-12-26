@@ -22,19 +22,21 @@ jobs:
         uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.6.3
+
       - name: Install dependencies
         run: |
           sudo apt-get -yqq install libpq-dev
           gem install bundler
           bundle install
-      - name: Setup test database
+
+      - name: Build App
         env:
-          RAILS_ENV: test
           PGHOST: localhost
           PGUSER: postgres
+          RAILS_ENV: test
         run: |
-          bin/rails db:create
-          bin/rails db:migrate
+            bin/rails db:setup
+
       - name: Run Rubocop
         run: bundle exec rubocop
       - name: Run tests
