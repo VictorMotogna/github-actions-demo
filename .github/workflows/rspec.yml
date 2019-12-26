@@ -40,8 +40,6 @@ jobs:
           bin/rails db:create
           bin/rails db:migrate
       - name: Run Rubocop
-        run: bin/rubocop
-      - name: Run Bundler Audit
-        run: bin/bundler-audit --update
+        run: bundle exec rubocop
       - name: Run tests
         run: bundle exec rspec
