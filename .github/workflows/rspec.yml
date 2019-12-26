@@ -12,7 +12,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_DB: github_actions_demo_test
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_PASSWORD: ""
         ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
@@ -39,7 +39,6 @@ jobs:
         run: |
           bin/rails db:create
           bin/rails db:migrate
-
       - name: Run Rubocop
         run: bin/rubocop
       - name: Run Bundler Audit
