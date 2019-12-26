@@ -1,0 +1,14 @@
+name: rspec
+
+on: [pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run rspec
+      run: |
+        bundle exec rspec
