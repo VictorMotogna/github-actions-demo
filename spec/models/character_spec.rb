@@ -13,4 +13,9 @@ RSpec.describe Character, type: :model do
     subject.name = nil
     expect(subject).to_not be_valid
   end
+
+  it 'is invalid with nil specie' do
+    subject.specie = nil
+    expect(subject).to_not be_valid
+  end
 end

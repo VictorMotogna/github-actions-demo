@@ -8,11 +8,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:11
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: github_actions_demo_test
-          POSTGRES_PASSWORD: postgres
+        image: postgres:12
         ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
@@ -26,22 +22,26 @@ jobs:
         uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.6.3
+
       - name: Install dependencies
         run: |
+          sudo apt-get -yqq install libpq-dev
           gem install bundler
           bundle install
-      - name: Setup test database
+
+      - name: Build database
         env:
-          RAILS_ENV: test
-          PGHOST: github_actions_demo_test
+          PGHOST: localhost
           PGUSER: postgres
+          RAILS_ENV: test
         run: |
-          bin/rails db:create
-          bin/rails db:migrate
+          bundle exec rails db:create db:migrate
 
       - name: Run Rubocop
-        run: bin/rubocop
-      - name: Run Bundler Audit
-        run: bin/bundler-audit --update
+        run: bundle exec rubocop
       - name: Run tests
-        run: bin/rspec
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          RAILS_ENV: test
+        run: bundle exec rspec
