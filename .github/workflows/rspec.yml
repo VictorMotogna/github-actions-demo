@@ -34,7 +34,7 @@ jobs:
       - name: Setup test database
         env:
           RAILS_ENV: test
-          PGHOST: github_actions_demo_test
+          PGHOST: localhost
           PGUSER: postgres
         run: |
           bin/rails db:create
@@ -44,4 +44,4 @@ jobs:
       - name: Run Bundler Audit
         run: bin/bundler-audit --update
       - name: Run tests
-        run: bin/rspec
+        run: bundle exec rspec
