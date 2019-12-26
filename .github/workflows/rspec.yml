@@ -28,6 +28,7 @@ jobs:
           ruby-version: 2.6.3
       - name: Install dependencies
         run: |
+          sudo apt-get -yqq install libpq-dev
           gem install bundler
           bundle install
       - name: Setup test database
