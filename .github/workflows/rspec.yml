@@ -29,7 +29,7 @@ jobs:
           gem install bundler
           bundle install
 
-      - name: Build App
+      - name: Build database
         env:
           PGHOST: localhost
           PGUSER: postgres
