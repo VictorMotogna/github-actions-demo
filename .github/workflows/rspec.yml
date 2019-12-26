@@ -35,10 +35,13 @@ jobs:
           PGUSER: postgres
           RAILS_ENV: test
         run: |
-            bin/rails db:setup
-            bin/rails db:migrate
+          bundle exec rails db:create db:migrate
 
       - name: Run Rubocop
         run: bundle exec rubocop
       - name: Run tests
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          RAILS_ENV: test
         run: bundle exec rspec
