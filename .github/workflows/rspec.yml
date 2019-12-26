@@ -8,11 +8,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:11
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: github_actions_demo_test
-          POSTGRES_PASSWORD: ""
+        image: postgres:12
         ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
