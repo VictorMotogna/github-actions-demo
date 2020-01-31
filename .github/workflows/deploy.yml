@@ -1,4 +1,4 @@
-ame: Ruby deploy to Heroku
+name: Ruby deploy to Heroku
 on:
   push:
     branches:
